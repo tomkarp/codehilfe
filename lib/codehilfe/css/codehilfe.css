@@ -354,6 +354,10 @@ button.ch-luecken-geist {
     margin-top: 0.5rem;
 }
 
+article .ch-aktionen > button {
+    margin-bottom: 0;
+}
+
 .ch-aktionen button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -363,6 +367,11 @@ button.ch-luecken-geist {
     font-weight: bold;
     min-height: 1.2em;
     margin: 0.25rem 0 0;
+}
+
+.ch-meldung:empty {
+    min-height: 0;
+    margin: 0;
 }
 
 .ch-meldung.ch-erfolg {
