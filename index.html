@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CodeHilfe erstellen</title>
+	<meta name="description" content="Interaktive Code-Aufgaben erstellen: Lücken füllen, Codebausteine einsetzen und Zeilen sortieren. Ohne Anmeldung – die Aufgabe steckt vollständig im Link.">
+	<link rel="icon" href="bilder/icon.svg" type="image/svg+xml">
+	<link rel="stylesheet" href="lib/prism/prism.css">
+	<link rel="stylesheet" href="lib/codehilfe/css/codehilfe.css">
+	<link rel="stylesheet" href="css/seite.css">
+</head>
+
+<body>
+	<header class="kopf">
+		<div class="kopf-innen">
+			<a class="marke" href="index.html">
+				<img src="bilder/icon.svg" alt="" width="28" height="28">
+				<span>CodeHilfe</span>
+			</a>
+			<nav class="navigation" aria-label="Hauptnavigation">
+				<a href="index.html" aria-current="page">Erstellen</a>
+				<a href="hilfe.html">Hilfe</a>
+			</nav>
+		</div>
+	</header>
+
+	<main class="inhalt">
+		<div class="einleitung">
+			<h1>CodeHilfe erstellen</h1>
+			<p>
+				Mit der CodeHilfe erstellst du interaktive Code-Aufgaben für deine
+				Schülerinnen und Schüler. Sie füllen Lücken im Programm, setzen
+				Codebausteine ein oder bringen durcheinandergeratene Zeilen in die
+				richtige Reihenfolge und bekommen dazu sofort eine Rückmeldung. Die
+				fertige Aufgabe teilst du als Link oder QR-Code, eine Anmeldung ist
+				nicht nötig.
+			</p>
+		</div>
+
+		<div id="link-hinweis" class="leiste" role="alert" hidden>
+			<p id="link-hinweis-text"></p>
+		</div>
+
+		<div id="wiederherstellen" class="leiste" hidden>
+			<p id="wiederherstellen-text">Die Aufgabe aus dem Link wurde geladen.</p>
+			<button type="button" class="knopf knopf-klein" id="entwurf-zurueck">Vorherigen Entwurf wiederherstellen</button>
+		</div>
+
+		<div class="editor-raster">
+			<section class="panel karte" aria-labelledby="titel-aufgabe">
+				<div class="panel-kopf">
+					<h2 id="titel-aufgabe">Aufgabe</h2>
+					<div class="panel-aktionen">
+						<button type="button" class="knopf knopf-klein" id="knopf-beispiel">Beispiel laden</button>
+						<button type="button" class="knopf knopf-klein" id="knopf-oeffnen">Öffnen …</button>
+						<button type="button" class="knopf knopf-klein" id="knopf-neu">Neu</button>
+					</div>
+				</div>
+
+				<div class="feld">
+					<label for="feld-titel">Überschrift <span class="feld-hinweis">(optional)</span></label>
+					<input type="text" id="feld-titel" autocomplete="off" placeholder="z.B. Aufgabe 1">
+				</div>
+
+				<div class="feld">
+					<label for="feld-aufgabe">Aufgabenstellung <span class="feld-hinweis">(optional)</span></label>
+					<textarea id="feld-aufgabe" rows="5" placeholder="Was sollen die Schülerinnen und Schüler tun?"></textarea>
+					<p class="feld-hinweis">
+						Leerzeile = neuer Absatz, <code>`Code`</code> im Text,
+						<code>**fett**</code>, Listen mit <code>-</code>, Blöcke zwischen
+						<code>```</code>-Zeilen (z.B. für eine erwartete Ausgabe).
+					</p>
+				</div>
+
+				<div class="feld">
+					<div class="feld-kopf">
+						<label for="feld-code">Lösungscode mit Markierungen</label>
+						<div class="sprache">
+							<label for="feld-sprache">Sprache</label>
+							<select id="feld-sprache">
+								<option value="python">Python</option>
+								<option value="kotlin">Kotlin</option>
+								<option value="java">Java</option>
+								<option value="javascript">JavaScript</option>
+								<option value="c">C</option>
+								<option value="cpp">C++</option>
+								<option value="elm">Elm</option>
+								<option value="racket">Racket</option>
+								<option value="scheme">Scheme</option>
+								<option value="sql">SQL</option>
+								<option value="markup">HTML / XML</option>
+								<option value="css">CSS</option>
+								<option value="yaml">YAML</option>
+								<option value="">ohne Hervorhebung</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="werkzeugleiste" role="toolbar" aria-label="Markierungen einfügen" aria-controls="feld-code">
+						<div class="werkzeuggruppe">
+							<span class="werkzeuggruppe-titel">Lücke</span>
+							<button type="button" class="werkzeug" data-werkzeug="luecke"
+								title="Markierten Text zur Lücke machen: §§antwort§§">Lücke</button>
+							<button type="button" class="werkzeug" data-werkzeug="baustein"
+								title="Lücke, für die ein Codebaustein angeboten wird: §§antwort::baustein§§">Baustein</button>
+							<button type="button" class="werkzeug" data-werkzeug="tippen"
+								title="Lücke, die getippt werden muss: §§antwort::tippen§§">Nur tippen</button>
+							<button type="button" class="werkzeug" data-werkzeug="alternative"
+								title="Weitere richtige Antwort für die Lücke am Cursor: §§antwort§alternative§§">+ Alternative</button>
+							<button type="button" class="werkzeug" data-werkzeug="extra-baustein"
+								title="Zusätzlichen, nicht benötigten Baustein in einer neuen Zeile einfügen: §§baustein::extra§§">Extra-Baustein</button>
+						</div>
+						<div class="werkzeuggruppe">
+							<span class="werkzeuggruppe-titel">Zeile</span>
+							<button type="button" class="werkzeug" data-werkzeug="fest"
+								title="Zeile bleibt an ihrer Position: §§fest">Fest</button>
+							<button type="button" class="werkzeug" data-werkzeug="gruppe"
+								title="Direkt aufeinanderfolgende Zeilen dürfen die Reihenfolge tauschen: §§gruppe">Austauschbar</button>
+							<button type="button" class="werkzeug" data-werkzeug="gruppe-name"
+								title="Benannte Gruppe, auch über feste Zeilen hinweg: §§gruppe=name">Gruppe …</button>
+							<button type="button" class="werkzeug" data-werkzeug="extra"
+								title="Zeile gehört nicht zur Lösung und muss in die Ablage: §§extra">Überflüssig</button>
+							<button type="button" class="werkzeug" data-werkzeug="entfernen"
+								title="Zeilenmarkierung entfernen">✕</button>
+						</div>
+					</div>
+					<textarea id="feld-code" class="code-feld" rows="16" spellcheck="false"
+						autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off"
+						aria-describedby="werkzeug-status code-hinweis"></textarea>
+					<p id="werkzeug-status" class="werkzeug-status" aria-live="polite"></p>
+					<p id="code-hinweis" class="feld-hinweis">
+						Text auswählen und einen Knopf wählen – oder die Markierungen direkt
+						tippen. Tab rückt ein; mit Esc und danach Tab verlässt du das Feld.
+						<a href="hilfe.html#markierungen">Alle Markierungen</a>
+					</p>
+				</div>
+
+				<fieldset class="einstellungen">
+					<legend>Einstellungen</legend>
+					<div class="einstellung schalter">
+						<label>
+							<input type="checkbox" id="feld-sortieren">
+							Zeilen mischen und sortieren lassen
+						</label>
+					</div>
+					<div class="einstellung" id="einstellung-verschieben">
+						<label for="feld-verschieben">Zeilen verschieben</label>
+						<select id="feld-verschieben">
+							<option value="ueberall">über feste Zeilen hinweg</option>
+							<option value="abschnitt">nur innerhalb ihres Abschnitts</option>
+						</select>
+					</div>
+					<div class="einstellung">
+						<label for="feld-eingabe">Lücken füllen</label>
+						<select id="feld-eingabe">
+							<option value="tippen">durch Tippen</option>
+							<option value="baustein">durch Tippen oder Bausteine</option>
+						</select>
+					</div>
+					<div class="einstellung">
+						<label for="feld-loesung">Lösung anzeigen</label>
+						<select id="feld-loesung">
+							<option value="nie">nie</option>
+							<option value="nach-fehler">nach einem Fehlversuch</option>
+							<option value="immer">jederzeit</option>
+						</select>
+					</div>
+				</fieldset>
+			</section>
+
+			<div class="spalte">
+				<section class="panel karte" aria-labelledby="titel-vorschau">
+					<div class="panel-kopf">
+						<h2 id="titel-vorschau">Vorschau</h2>
+						<span id="vorschau-status" class="status-marke" role="status"></span>
+					</div>
+					<div class="vorschau-rahmen">
+						<article id="vorschau"></article>
+					</div>
+				</section>
+
+				<section class="panel karte teilen" aria-labelledby="titel-teilen">
+					<div class="panel-kopf">
+						<h2 id="titel-teilen">Teilen</h2>
+					</div>
+
+					<div class="teilen-info">
+						<p>
+							<strong>Gespeichert wird nichts:</strong> Die Aufgabe steckt
+							vollständig im Link (<span id="link-laenge">0</span> Zeichen).
+							Links laufen deshalb nicht ab. Jede Änderung ergibt einen neuen Link.
+						</p>
+						<p>
+							<strong>Wer sich auskennt, kann die Lösung aus dem Link auslesen.
+							Die CodeHilfe ist zum Üben gedacht, nicht für
+							Leistungsüberprüfungen.</strong>
+						</p>
+					</div>
+
+					<div class="teilen-feld">
+						<label class="feld-titel" for="link-schueler">Link für Schülerinnen und Schüler</label>
+						<p class="feld-hinweis">Öffnet nur die Aufgabe.</p>
+						<div class="teilen-zeile">
+							<input type="text" id="link-schueler" readonly>
+							<button type="button" class="knopf knopf-haupt" data-kopiere="link-schueler">Kopieren</button>
+							<button type="button" class="knopf" id="knopf-link-oeffnen" title="Aufgabe in einem neuen Tab öffnen">Öffnen</button>
+							<button type="button" class="knopf" id="knopf-qr">QR-Code</button>
+						</div>
+					</div>
+
+					<div class="teilen-feld">
+						<label class="feld-titel" for="link-editor">Link zum Weiterbearbeiten</label>
+						<p class="feld-hinweis">Nur für dich: öffnet die Aufgabe wieder hier im Editor.</p>
+						<div class="teilen-zeile">
+							<input type="text" id="link-editor" readonly>
+							<button type="button" class="knopf" data-kopiere="link-editor">Kopieren</button>
+						</div>
+					</div>
+
+					<details>
+						<summary>In eine Webseite oder Moodle einbetten</summary>
+						<p class="feld-hinweis">
+							Diesen Code als HTML einfügen. Die Höhe ist ein Vorschlag nach der
+							Vorschau und lässt sich anpassen.
+						</p>
+						<textarea id="einbettung" rows="3" readonly></textarea>
+						<button type="button" class="knopf knopf-klein" data-kopiere="einbettung">Code kopieren</button>
+					</details>
+
+					<details>
+						<summary>Als Datei sichern</summary>
+						<p class="feld-hinweis">
+							Eine Sicherungskopie, die du später über „Öffnen …“ wieder laden
+							kannst.
+						</p>
+						<button type="button" class="knopf knopf-klein" id="knopf-speichern">Datei speichern</button>
+					</details>
+				</section>
+			</div>
+		</div>
+	</main>
+
+	<footer class="fuss">
+		<a href="hilfe.html">Hilfe</a>
+		<span aria-hidden="true">·</span>
+		<a href="hilfe.html#teilen">Datenschutz und Speicherung</a>
+	</footer>
+
+	<dialog id="dialog-qr" aria-labelledby="dialog-qr-titel">
+		<h2 id="dialog-qr-titel">QR-Code für die Aufgabe</h2>
+		<div class="qr-bild" id="qr-bild"></div>
+		<p class="qr-link" id="qr-link"></p>
+		<div class="dialog-aktionen">
+			<button type="button" class="knopf" id="qr-speichern">Als Bild speichern</button>
+			<button type="button" class="knopf knopf-haupt" data-schliessen>Schließen</button>
+		</div>
+	</dialog>
+
+	<dialog id="dialog-oeffnen" aria-labelledby="dialog-oeffnen-titel">
+		<h2 id="dialog-oeffnen-titel">Aufgabe öffnen</h2>
+		<form id="form-link" method="dialog">
+			<label class="feld-titel" for="eingabe-link">Link einfügen</label>
+			<p class="feld-hinweis">Der Bearbeitungslink einer CodeHilfe. Schülerlinks lassen sich nicht im Editor öffnen.</p>
+			<div class="teilen-zeile">
+				<input type="url" id="eingabe-link" placeholder="https://…/index.html#v1.…" autocomplete="off">
+				<button type="submit" class="knopf knopf-haupt">Öffnen</button>
+			</div>
+			<p class="werkzeug-status wichtig" id="oeffnen-fehler" aria-live="polite"></p>
+		</form>
+		<p class="oeffnen-oder">oder</p>
+		<p class="dialog-mitte">
+			<button type="button" class="knopf" id="knopf-datei">Gespeicherte Datei auswählen …</button>
+			<input type="file" id="eingabe-datei" accept=".json,application/json" hidden>
+		</p>
+		<div class="dialog-aktionen">
+			<button type="button" class="knopf" data-schliessen>Abbrechen</button>
+		</div>
+	</dialog>
+
+	<script src="lib/prism/prism.js"></script>
+	<script src="lib/codehilfe/js/codehilfe.js"></script>
+	<script src="lib/qrcode/qrcode.js"></script>
+	<script src="js/teilen.js"></script>
+	<script src="js/aufgabe.js"></script>
+	<script src="js/editor.js"></script>
+</body>
+
+</html>

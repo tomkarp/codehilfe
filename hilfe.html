@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Hilfe – CodeHilfe</title>
+	<meta name="description" content="Anleitung und Referenz zur CodeHilfe: Lücken, Codebausteine, sortierbare Zeilen, Einstellungen, Teilen und Einbetten.">
+	<link rel="icon" href="bilder/icon.svg" type="image/svg+xml">
+	<link rel="stylesheet" href="lib/prism/prism.css">
+	<link rel="stylesheet" href="lib/codehilfe/css/codehilfe.css">
+	<link rel="stylesheet" href="css/seite.css">
+</head>
+
+<body>
+	<header class="kopf">
+		<div class="kopf-innen">
+			<a class="marke" href="index.html">
+				<img src="bilder/icon.svg" alt="" width="28" height="28">
+				<span>CodeHilfe</span>
+			</a>
+			<nav class="navigation" aria-label="Hauptnavigation">
+				<a href="index.html">Erstellen</a>
+				<a href="hilfe.html" aria-current="page">Hilfe</a>
+			</nav>
+		</div>
+	</header>
+
+	<main class="inhalt hilfe">
+		<article>
+			<h1>Hilfe zur CodeHilfe</h1>
+			<p class="vorspann">
+				Mit der <em>CodeHilfe</em> können Schülerinnen und Schüler Lücken in
+				einem Programm ergänzen, Codebausteine einsetzen und
+				durcheinandergeratene Zeilen sortieren. Die Lösung wird direkt im
+				Browser überprüft.
+			</p>
+
+			<nav class="inhaltsverzeichnis" aria-label="Inhalt">
+				<strong>Inhalt</strong>
+				<ol>
+					<li><a href="#erstellen">Eine CodeHilfe erstellen</a></li>
+					<li><a href="#beispiel">Ein umfassendes Beispiel</a></li>
+					<li><a href="#referenz">Referenz</a></li>
+					<li><a href="#markierungen">Markierungen im Lösungscode</a></li>
+					<li><a href="#teilen">Teilen, Speichern und Datenschutz</a></li>
+					<li><a href="#beispiele">Beispiele</a></li>
+					<li><a href="#einbinden">In eigene Webseiten einbinden</a></li>
+				</ol>
+			</nav>
+
+			<h2 id="erstellen">Eine CodeHilfe erstellen</h2>
+			<p>
+				Grundlage jeder CodeHilfe ist das fertige, richtige Programm. Darin
+				markierst du, was die Schülerinnen und Schüler ergänzen oder ordnen
+				sollen. Das Werkzeug ist sprachunabhängig; die Beispiele auf dieser
+				Seite verwenden Python und Kotlin.
+			</p>
+			<ol class="schritte">
+				<li>
+					Öffne den <a href="index.html">Editor</a>, füge den Lösungscode ein
+					und wähle die Programmiersprache für die Syntaxhervorhebung. Zum
+					Ausprobieren lädt „Beispiel laden“ eine kleine fertige Aufgabe.
+				</li>
+				<li>
+					Wähle Text aus und setze mit den Knöpfen über dem Codefeld
+					Lücken und Zeilenmarkierungen. Du kannst die
+					<a href="#markierungen">Markierungen</a> auch direkt tippen.
+				</li>
+				<li>
+					Lege unter <em>Einstellungen</em> fest, ob Zeilen sortiert werden,
+					wie Lücken gefüllt werden und ob eine Lösung angezeigt wird.
+				</li>
+				<li>
+					Ergänze bei Bedarf eine Überschrift und eine Aufgabenstellung.
+				</li>
+				<li>
+					Prüfe die Aufgabe in der Vorschau. Sie verhält sich genau so wie
+					bei deinen Schülerinnen und Schülern. Stimmt etwas mit den
+					Markierungen nicht, erklärt die Vorschau, was zu ändern ist.
+				</li>
+				<li>
+					Teile den Link, den QR-Code oder bette die Aufgabe ein
+					(siehe <a href="#teilen">Teilen</a>).
+				</li>
+			</ol>
+
+			<h2 id="beispiel">Ein umfassendes Beispiel</h2>
+			<p>
+				Dieses Beispiel verbindet sortierbare und feste Zeilen, zu tippende
+				Lücken, Codebausteine, eine überflüssige Zeile und einen zusätzlichen
+				Baustein. Außerdem kann die Lösung nach einem fehlerhaften Versuch
+				angezeigt werden.
+			</p>
+
+			<div class="beispiel">
+				<h3 class="aufgabe">Aufgabe – Temperaturbericht</h3>
+				<div class="aufgabenstellung">
+					<p>
+						Baue einen Temperaturbericht für Mainz zusammen. Heute sind es
+						<code>18 °C</code>, morgen soll die Temperatur um <code>2 °C</code>
+						steigen. Das fertige Programm soll folgende Ausgabe erzeugen:
+					</p>
+<pre class="ausgabe">
+Heute in Mainz: 18 °C
+Vorhersage für morgen:
+20 °C
+</pre>
+					<p>
+						Fülle die Lücken und bringe die Zeilen in die richtige
+						Reihenfolge. Die Zuweisungen für Ort und heutige Temperatur dürfen
+						ihre Reihenfolge tauschen. Ziehe die nicht benötigte Ausgabezeile
+						in die Ablage oder nutze dafür den Knopf <code>✕</code>. Einer der
+						angebotenen Bausteine wird nicht benötigt.
+					</p>
+				</div>
+<pre class="quelltext codehilfe" data-zeilen-sortieren data-luecken-eingabe="baustein" data-loesung="nach-fehler"><code class="language-python">
+def temperaturbericht():                       §§fest
+    ort = §§"Mainz"§§                           §§gruppe
+    heute = §§18§§                              §§gruppe
+    print(f"Heute in {ort}: {heute} °C")
+    print("Vorhersage für morgen:")              §§fest
+    morgen = heute + §§2::tippen§§
+    print(f"{morgen} °C")
+    print("Keine Daten")                         §§extra
+    §§20::extra§§
+temperaturbericht()                            §§fest
+</code></pre>
+			</div>
+
+			<p>Der Lösungscode dazu, wie er im Editor steht:</p>
+<pre class="quelltext"><code class="language-python">
+def temperaturbericht():                       §§fest
+    ort = §§"Mainz"§§                           §§gruppe
+    heute = §§18§§                              §§gruppe
+    print(f"Heute in {ort}: {heute} °C")
+    print("Vorhersage für morgen:")              §§fest
+    morgen = heute + §§2::tippen§§
+    print(f"{morgen} °C")
+    print("Keine Daten")                         §§extra
+    §§20::extra§§
+temperaturbericht()                            §§fest
+</code></pre>
+			<p>
+				Einstellungen: <em>Zeilen mischen und sortieren lassen</em>,
+				Lücken füllen <em>durch Tippen oder Bausteine</em>, Lösung anzeigen
+				<em>nach einem Fehlversuch</em>.
+			</p>
+
+			<h2 id="referenz">Referenz</h2>
+
+			<h3 id="einstellungen">Einstellungen</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Einstellung</th>
+						<th>Werte</th>
+						<th>Bedeutung</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Zeilen mischen und sortieren lassen</td>
+						<td>an / aus (Standard)</td>
+						<td>Die beweglichen Zeilen mischen und sortierbar machen. Ist die
+							Einstellung aus, bleibt ihre Reihenfolge fest. Lücken können
+							unabhängig davon immer verwendet werden.</td>
+					</tr>
+					<tr>
+						<td>Zeilen verschieben</td>
+						<td>über feste Zeilen hinweg (Standard), nur innerhalb ihres
+							Abschnitts</td>
+						<td>Die beweglichen Zeilen über feste Zeilen hinweg mischen und
+							verschieben oder beides auf die durch feste Zeilen begrenzten
+							Abschnitte beschränken. Nur beim Sortieren wirksam.</td>
+					</tr>
+					<tr>
+						<td>Lücken füllen</td>
+						<td>durch Tippen (Standard), durch Tippen oder Bausteine</td>
+						<td>Für alle Lücken festlegen, ob nur eine getippte Lösung erwartet
+							oder zusätzlich ein Codebaustein angeboten wird. Richtig
+							eingetippter Text wird in beiden Fällen anerkannt. Für einzelne
+							Lücken lässt sich das mit <code>::tippen</code> oder
+							<code>::baustein</code> überschreiben.</td>
+					</tr>
+					<tr>
+						<td>Lösung anzeigen</td>
+						<td>nie (Standard), nach einem Fehlversuch, jederzeit</td>
+						<td>Keine Lösungsanzeige anbieten, sie erst nach einer erfolglosen
+							Überprüfung freischalten oder von Anfang an anbieten.</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h3 id="markierungen">Markierungen im Lösungscode</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Markierung</th>
+						<th>Knopf</th>
+						<th>Bedeutung</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>§§antwort§§</code></td>
+						<td>Lücke</td>
+						<td>Eine Lücke. Standardmäßig wird die Antwort eingetippt.</td>
+					</tr>
+					<tr>
+						<td><code>§§antwort§alternative§§</code></td>
+						<td>+ Alternative</td>
+						<td>Eine zu tippende Lücke mit mehreren akzeptierten Antworten. Die
+							Antworten werden durch ein einzelnes <code>§</code> getrennt.</td>
+					</tr>
+					<tr>
+						<td><code>§§antwort::baustein§§</code></td>
+						<td>Baustein</td>
+						<td>Für diese Lücke einen Codebaustein anbieten. Die richtige
+							Antwort darf weiterhin eingetippt werden.</td>
+					</tr>
+					<tr>
+						<td><code>§§antwort::tippen§§</code></td>
+						<td>Nur tippen</td>
+						<td>Für diese Lücke ausschließlich eine getippte Antwort
+							erwarten.</td>
+					</tr>
+					<tr>
+						<td><code>§§antwort::extra§§</code></td>
+						<td>Extra-Baustein</td>
+						<td>Einen zusätzlichen Codebaustein anbieten, der für keine Lücke
+							benötigt wird. Die Markierung muss allein in einer Zeile stehen
+							und erscheint nicht im zusammengesetzten Code.</td>
+					</tr>
+					<tr>
+						<td><code>§§fest</code> am Zeilenende</td>
+						<td>Fest</td>
+						<td>Die Zeile bleibt an ihrer Position. Leerzeichen oder Tabs vor
+							der Markierung werden zusammen mit ihr entfernt.</td>
+					</tr>
+					<tr>
+						<td><code>§§gruppe</code> am Zeilenende</td>
+						<td>Austauschbar</td>
+						<td>Direkt aufeinanderfolgende Zeilen mit dieser Markierung dürfen
+							innerhalb ihrer Gruppe in beliebiger Reihenfolge stehen.</td>
+					</tr>
+					<tr>
+						<td><code>§§gruppe=name</code> am Zeilenende</td>
+						<td>Gruppe …</td>
+						<td>Alle gleich benannten Zeilen dürfen die für diese Gruppe
+							vorgesehenen Positionen untereinander tauschen. Sie müssen nicht
+							direkt aufeinanderfolgen und dürfen durch feste Zeilen getrennt
+							sein.</td>
+					</tr>
+					<tr>
+						<td><code>§§extra</code> am Zeilenende</td>
+						<td>Überflüssig</td>
+						<td>Die ganze Zeile gehört nicht zur Lösung und muss in die Ablage
+							verschoben werden.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				Zeilenmarkierungen (<code>§§fest</code>, <code>§§gruppe</code>,
+				<code>§§extra</code>) wirken nur, wenn Zeilen sortiert werden. Der
+				Editor schaltet das Sortieren deshalb ein, sobald du eine davon
+				setzt, und richtet alle Zeilenmarkierungen untereinander aus.
+			</p>
+
+			<h3 id="aufgabenstellung">Aufgabenstellung formatieren</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Eingabe</th>
+						<th>Wirkung</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Leerzeile</td>
+						<td>Beginnt einen neuen Absatz. Ein einfacher Zeilenumbruch bleibt
+							als Umbruch erhalten.</td>
+					</tr>
+					<tr>
+						<td><code>`print(x)`</code></td>
+						<td>Code im Fließtext</td>
+					</tr>
+					<tr>
+						<td><code>**wichtig**</code></td>
+						<td>Fettdruck</td>
+					</tr>
+					<tr>
+						<td><code>- Punkt</code></td>
+						<td>Aufzählung; mit <code>1. Schritt</code> eine nummerierte
+							Liste</td>
+					</tr>
+					<tr>
+						<td><code>```</code> … <code>```</code></td>
+						<td>Die Zeilen zwischen zwei <code>```</code>-Zeilen erscheinen als
+							Block in fester Schriftbreite, z.B. für eine erwartete
+							Ausgabe.</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h3 id="pruefung">Überprüfung und Kopieren</h3>
+			<ul>
+				<li>Die Überprüfung ist textbasiert; der Code wird nicht kompiliert.</li>
+				<li>
+					Bei Lücken sind Leerzeichen um Operatoren und Satzzeichen
+					unerheblich. Groß- und Kleinschreibung muss stimmen.
+				</li>
+				<li>
+					Mehrere akzeptierte Antworten sind nur bei zu tippenden Lücken
+					möglich. Ein Codebaustein hat genau eine Form.
+				</li>
+				<li>
+					Der Copy-Button oben rechts im Code kopiert den aktuellen
+					Bearbeitungsstand ohne CodeHilfe-Markierungen. Eine überflüssige
+					Zeile wird mitkopiert, solange sie noch nicht in der Ablage liegt.
+				</li>
+			</ul>
+
+			<h3 id="empfehlungen">Empfehlungen für den Einsatz</h3>
+			<ul>
+				<li>
+					Die CodeHilfe eignet sich besonders als freiwillige Hilfe zu einer
+					offenen Programmieraufgabe: Stelle die Aufgabe offen und biete den
+					Link für alle an, die nicht weiterkommen.
+				</li>
+				<li>
+					Bei Aufgaben, die ein Projekt einführen oder neue Inhalte
+					vermitteln, bietet sich <em>Lösung anzeigen: nach einem
+					Fehlversuch</em> an.
+				</li>
+				<li>
+					Bei Übungsaufgaben sollte keine Lösung angezeigt werden
+					(<em>Lösung anzeigen: nie</em>).
+				</li>
+				<li>
+					Überflüssige Zeilen und Extra-Bausteine erhöhen den Anspruch, weil
+					Ausprobieren allein nicht mehr zum Ziel führt.
+				</li>
+			</ul>
+
+			<h2 id="teilen">Teilen, Speichern und Datenschutz</h2>
+			<h3>Wege zum Teilen</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Weg</th>
+						<th>Wofür</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Link für Schülerinnen und Schüler</td>
+						<td>Öffnet nur die Aufgabe, z.B. über Moodle, Messenger oder
+							E-Mail.</td>
+					</tr>
+					<tr>
+						<td>QR-Code</td>
+						<td>Für Tablets und Smartphones im Unterricht, etwa über den Beamer.
+							Je länger die Aufgabe, desto feiner wird der Code.</td>
+					</tr>
+					<tr>
+						<td>Einbetten</td>
+						<td>Ein <code>iframe</code>-Code für Webseiten oder eine
+							Moodle-Textseite. Die eingebettete Aufgabe erscheint ohne Rahmen
+							auf weißem Grund.</td>
+					</tr>
+					<tr>
+						<td>Link zum Weiterbearbeiten</td>
+						<td>Nur für dich: Öffnet die Aufgabe wieder im Editor. Damit kannst
+							du sie später ändern oder als Vorlage für eine neue Aufgabe
+							nutzen. Mit dem Schülerlink geht das nicht: Er unterscheidet sich
+							nicht nur im Seitennamen, und der Editor lehnt ihn ab.</td>
+					</tr>
+					<tr>
+						<td>Datei</td>
+						<td>Eine Sicherungskopie (<code>.codehilfe.json</code>), die du
+							über „Öffnen …“ wieder lädst.</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h3>Wo wird die Aufgabe gespeichert?</h3>
+			<ul>
+				<li>
+					<strong>Nirgends auf einem Server.</strong> Die Aufgabe steckt
+					vollständig und komprimiert im Link, im Teil hinter dem
+					<code>#</code>. Diesen Teil schicken Browser nicht an den Server.
+					Es gibt keine Anmeldung und keine Datenbank.
+				</li>
+				<li>
+					Links laufen deshalb nicht ab. Sie lassen sich aber auch nicht
+					nachträglich ändern: Jede Änderung ergibt einen neuen Link. Wer
+					den alten Link hat, sieht weiterhin die alte Fassung.
+				</li>
+				<li>
+					Dein aktueller Entwurf wird nur in deinem Browser zwischengespeichert.
+					Löschst du die Browserdaten oder wechselst das Gerät, ist er dort
+					weg. Bewahre deshalb den Bearbeitungslink oder eine Datei auf.
+				</li>
+				<li>
+					Die Lösung steckt ebenfalls im Link. Wer sich auskennt, kann sie
+					auslesen. Die CodeHilfe ist zum Üben gedacht, nicht für
+					Leistungsüberprüfungen.
+				</li>
+				<li>
+					Zum Erzeugen und Öffnen der Links ist ein aktueller Browser nötig
+					(Chrome, Edge oder Firefox ab 2023, Safari ab Version 16.4).
+				</li>
+			</ul>
+
+			<h2 id="beispiele">Beispiele</h2>
+			<p>
+				Jedes Beispiel hat einen Schwerpunkt. Mit „Im Editor öffnen“ kannst du
+				es als Vorlage für eine eigene Aufgabe verwenden.
+			</p>
+
+			<h4>Beispiel 1 – Einfache Zeilensortierung</h4>
+			<p>
+				Für eine reine Sortieraufgabe genügt die Einstellung <em>Zeilen
+				mischen und sortieren lassen</em>. Die erste und letzte Zeile bleiben
+				hier fest.
+			</p>
+			<div class="beispiel" data-titel="Zahl verdoppeln">
+				<div class="aufgabenstellung">
+					<p>
+						Bringe die drei beweglichen Zeilen so in die richtige Reihenfolge,
+						dass das Programm zunächst eine Zahl speichert, sie verdoppelt und
+						anschließend das Ergebnis ausgibt.
+					</p>
+				</div>
+<pre class="quelltext codehilfe" data-zeilen-sortieren><code class="language-python">
+def verdoppeln():                  §§fest
+    zahl = 5
+    doppelt = zahl * 2
+    print(doppelt)
+verdoppeln()                       §§fest
+</code></pre>
+			</div>
+
+			<h4>Beispiel 2 – Einfache Lücken</h4>
+			<p>
+				Ohne weitere Einstellungen bleiben die Zeilen geordnet und die
+				Lösungen werden eingetippt. Es wird kein Lösungsbutton angezeigt.
+			</p>
+			<div class="beispiel" data-titel="Hund">
+				<div class="aufgabenstellung">
+					<p>
+						Ergänze den Datentyp des Attributs und gib dem Hund den Namen
+						<code>Bello</code>.
+					</p>
+				</div>
+<pre class="quelltext codehilfe"><code class="language-kotlin">
+class Hund {
+    var name: §§String§§ = "§§Bello§§"
+}
+</code></pre>
+			</div>
+
+			<h4>Beispiel 3 – Getrennte Sortierabschnitte</h4>
+			<p>
+				Mit <em>Zeilen verschieben: nur innerhalb ihres Abschnitts</em> werden
+				bewegliche Zeilen nur innerhalb des jeweiligen, durch feste Zeilen
+				begrenzten Abschnitts gemischt und verschoben.
+			</p>
+			<div class="beispiel" data-titel="Begrüßung und Berechnung">
+				<div class="aufgabenstellung">
+					<p>
+						Sortiere zuerst die Begrüßung und danach die Berechnung. Die
+						Trennlinie zwischen den beiden Programmteilen bleibt dabei an ihrer
+						Position.
+					</p>
+				</div>
+<pre class="quelltext codehilfe" data-zeilen-sortieren data-zeilen-verschieben="abschnitt"><code class="language-python">
+def ausgabe():                       §§fest
+    name = "Ada"
+    print(f"Hallo {name}")
+    print("----------------")         §§fest
+    zahl = 5
+    doppelt = zahl * 2
+    print(doppelt)
+ausgabe()                            §§fest
+</code></pre>
+			</div>
+
+			<h4>Beispiel 4 – Tippen und Bausteine mischen</h4>
+			<p>
+				Mit <code>::baustein</code> kann bei der standardmäßigen Texteingabe
+				für eine einzelne Lücke ein Baustein angeboten werden. In jedes Feld
+				kann trotzdem getippt werden. Ein Baustein in einer reinen Tipplücke
+				gilt dagegen als falsch.
+			</p>
+			<div class="beispiel" data-titel="Person">
+				<div class="aufgabenstellung">
+					<p>
+						Ergänze die Person: Setze ihren Namen als Baustein ein und tippe
+						ihr Alter in die zweite Lücke.
+					</p>
+				</div>
+<pre class="quelltext codehilfe"><code class="language-kotlin">
+class Person {
+    val name = §§"Ada"::baustein§§
+    val alter = §§17§§
+}
+</code></pre>
+			</div>
+
+			<h4>Beispiel 5 – Alternative Antworten und sofortige Lösung</h4>
+			<p>
+				Alternative Antworten werden mit einem einzelnen <code>§</code>
+				getrennt. <em>Lösung anzeigen: jederzeit</em> zeigt den Lösungsbutton
+				von Anfang an.
+			</p>
+			<div class="beispiel" data-titel="Verdoppeln">
+				<div class="aufgabenstellung">
+					<p>
+						Ergänze die Funktion so, dass sie das Doppelte der übergebenen Zahl
+						zurückgibt.
+					</p>
+				</div>
+<pre class="quelltext codehilfe" data-loesung="immer"><code class="language-python">
+def verdoppeln(zahl):
+    return §§zahl * 2§2 * zahl§§
+</code></pre>
+			</div>
+
+			<h4>Beispiel 6 – Direkt aufeinanderfolgende austauschbare Zeilen</h4>
+			<p>
+				Direkt aufeinanderfolgende Zeilen mit <code>§§gruppe</code> bilden
+				eine unbenannte Gruppe. Ihre Reihenfolge ist für die Lösung
+				unerheblich.
+			</p>
+			<div class="beispiel" data-titel="Hund sortieren">
+				<div class="aufgabenstellung">
+					<p>
+						Sortiere die Klasse <code>Hund</code>. Die beiden Attribute dürfen
+						in beliebiger Reihenfolge direkt hinter dem Klassenkopf stehen.
+					</p>
+				</div>
+<pre class="quelltext codehilfe" data-zeilen-sortieren><code class="language-kotlin">
+class Hund {                       §§fest
+    var name = ""                  §§gruppe
+    var alter = 0                  §§gruppe
+    fun bellen() {
+        println("Wuff")
+    }
+}                                  §§fest
+</code></pre>
+			</div>
+
+			<h4>Beispiel 7 – Verteilte austauschbare Zeilen</h4>
+			<p>
+				Eine benannte Gruppe gilt in der gesamten CodeHilfe. Gleich benannte
+				Zeilen dürfen deshalb auch über eine feste Zeile hinweg ihre
+				vorgesehenen Plätze tauschen.
+			</p>
+			<div class="beispiel" data-titel="Farben ausgeben">
+				<div class="aufgabenstellung">
+					<p>
+						Sortiere die Funktion. Sie soll zuerst <code>Beginn</code>, danach
+						die beiden Farben in beliebiger Reihenfolge und zuletzt
+						<code>Ende</code> ausgeben.
+					</p>
+				</div>
+<pre class="quelltext codehilfe" data-zeilen-sortieren><code class="language-python">
+def farben_ausgeben():              §§fest
+    print("Beginn")
+    print("Rot")                     §§gruppe=farben
+    print("----------------")         §§fest
+    print("Blau")                    §§gruppe=farben
+    print("Ende")
+farben_ausgeben()                    §§fest
+</code></pre>
+			</div>
+
+			<h4>Beispiel 8 – Überflüssige Zeile</h4>
+			<p>
+				Eine mit <code>§§extra</code> markierte Zeile gehört nicht zur Lösung.
+				Sie kann in die Ablage gezogen oder mit dem Knopf <code>✕</code>
+				dorthin verschoben werden.
+			</p>
+			<div class="beispiel" data-titel="Zahl ausgeben">
+				<div class="aufgabenstellung">
+					<p>
+						Sortiere die Funktion so, dass sie die gespeicherte Zahl ausgibt.
+						Verschiebe die syntaktisch fehlerhafte Zeile in die Ablage.
+					</p>
+				</div>
+<pre class="quelltext codehilfe" data-zeilen-sortieren><code class="language-python">
+def zahl_ausgeben():          §§fest
+    zahl = 5
+    print(zahl)
+    print zahl                §§extra
+zahl_ausgeben()               §§fest
+</code></pre>
+			</div>
+
+			<h4>Beispiel 9 – Hinweise bei fehlerhaften Markierungen</h4>
+			<p>
+				Erkennt die CodeHilfe eine widersprüchliche oder unvollständige
+				Konfiguration, zeigt sie anstelle der Aufgabe konkrete Hinweise. Im
+				Editor erscheinen sie in der Vorschau; Schülerlink und QR-Code gibt es
+				erst, wenn alles stimmt. Das folgende Beispiel ist absichtlich
+				fehlerhaft: Die Lücke soll ein Baustein sein, hat aber zwei
+				Antworten, und eine Gruppe besteht aus nur einer Zeile.
+			</p>
+			<div class="aufgabenstellung">
+				<p>
+					Ergänze eine Tierart und ordne die Ausgabe richtig in das
+					Hauptprogramm ein.
+				</p>
+			</div>
+<pre class="quelltext codehilfe" data-zeilen-sortieren data-luecken-eingabe="baustein"><code class="language-kotlin">
+fun main() {                              §§fest
+    val tier = §§"Hund"§"Katze"§§
+    println(tier)                         §§gruppe
+}                                         §§fest
+</code></pre>
+
+			<h2 id="einbinden">In eigene Webseiten einbinden</h2>
+			<p>
+				Für eine einzelne Aufgabe genügt der <code>iframe</code>-Code aus dem
+				Editor. Wer eigene Webseiten mit mehreren CodeHilfen gestaltet, kann
+				das Skript auch direkt einbinden. Dazu den Ordner
+				<code>lib/codehilfe</code> aus dem Quelltext dieses Werkzeugs in das
+				eigene Projekt kopieren.
+			</p>
+<pre class="quelltext"><code class="language-markup">
+&lt;link rel="stylesheet" href="lib/codehilfe/css/codehilfe.css"&gt;
+…
+&lt;article&gt;
+    &lt;pre class="quelltext codehilfe" data-zeilen-sortieren&gt;&lt;code class="language-python"&gt;
+    …
+    &lt;/code&gt;&lt;/pre&gt;
+&lt;/article&gt;
+…
+&lt;script src="lib/codehilfe/js/codehilfe.js"&gt;&lt;/script&gt;
+</code></pre>
+			<ul>
+				<li>
+					Eine CodeHilfe ist ein normaler Quelltextblock aus <code>pre</code>
+					und <code>code</code>. Das <code>pre</code>-Element erhält die
+					Klasse <code>codehilfe</code>, eine Klasse wie
+					<code>language-python</code> am <code>code</code>-Element steuert
+					die Syntaxhervorhebung. Fehlt sie, wird der Code ohne Hervorhebung
+					angezeigt.
+				</li>
+				<li>
+					Die Stile erwarten, dass die CodeHilfe innerhalb eines
+					<code>article</code>-Elements steht.
+				</li>
+				<li>
+					Für Syntaxhervorhebung und Copy-Knopf zusätzlich
+					<a href="https://prismjs.com">Prism</a> mit den Plugins
+					<em>Toolbar</em>, <em>Copy to Clipboard</em> und <em>Normalize
+					Whitespace</em> vor <code>codehilfe.js</code> laden.
+				</li>
+				<li>
+					Zeichen wie <code>&lt;</code> und <code>&amp;</code> werden im
+					Quelltext wie in jedem HTML-Code als <code>&amp;lt;</code> bzw.
+					<code>&amp;amp;</code> geschrieben.
+				</li>
+			</ul>
+
+			<h3>Attribute am <code>pre</code>-Element</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Attribut</th>
+						<th>Werte</th>
+						<th>Einstellung im Editor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>data-zeilen-sortieren</code></td>
+						<td>ohne Wert</td>
+						<td>Zeilen mischen und sortieren lassen</td>
+					</tr>
+					<tr>
+						<td><code>data-zeilen-verschieben</code></td>
+						<td><code>ueberall</code> (Standard), <code>abschnitt</code></td>
+						<td>Zeilen verschieben</td>
+					</tr>
+					<tr>
+						<td><code>data-luecken-eingabe</code></td>
+						<td><code>tippen</code> (Standard), <code>baustein</code></td>
+						<td>Lücken füllen</td>
+					</tr>
+					<tr>
+						<td><code>data-loesung</code></td>
+						<td><code>nie</code> (Standard), <code>nach-fehler</code>,
+							<code>immer</code></td>
+						<td>Lösung anzeigen</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h4>Beispiel 10 – CodeHilfe als aufklappbare Hilfe</h4>
+			<p>
+				Auf einer eigenen Seite kann die CodeHilfe als freiwillige Hilfe zu
+				einer offenen Programmieraufgabe in einem aufklappbaren Bereich stehen.
+				Wer die Aufgabe selbstständig löst, sieht sie nicht.
+			</p>
+			<div class="aufgabenstellung">
+				<p>
+					Entwickle ein Programm, das die Zahlen von <code>1</code> bis
+					<code>n</code> addiert und die Summe ausgibt.
+				</p>
+			</div>
+			<details class="frage">
+				<summary>Hilfe zum Programm</summary>
+				<p>
+					Bringe die Zeilen in die richtige Reihenfolge. Eine Zeile wird nicht
+					benötigt.
+				</p>
+<pre class="quelltext codehilfe" data-zeilen-sortieren data-loesung="nach-fehler"><code class="language-python">
+n = int(input("n: "))                 §§fest
+summe = 0                             §§gruppe
+zahl = 1                              §§gruppe
+while zahl &lt;= n:
+    summe = summe + zahl
+    zahl = zahl + 1
+    print(summe)                      §§extra
+print("Summe:", summe)                §§fest
+</code></pre>
+			</details>
+<pre class="quelltext"><code class="language-markup">
+&lt;details class="frage"&gt;
+&lt;summary&gt;Hilfe zum Programm&lt;/summary&gt;
+&lt;p&gt;
+    Bringe die Zeilen in die richtige Reihenfolge. Eine Zeile wird nicht
+    benötigt.
+&lt;/p&gt;
+&lt;pre class="quelltext codehilfe" data-zeilen-sortieren data-loesung="nach-fehler"&gt;&lt;code class="language-python"&gt;
+n = int(input("n: "))                 §§fest
+summe = 0                             §§gruppe
+zahl = 1                              §§gruppe
+while zahl &amp;lt;= n:
+    summe = summe + zahl
+    zahl = zahl + 1
+    print(summe)                      §§extra
+print("Summe:", summe)                §§fest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/details&gt;
+</code></pre>
+		</article>
+	</main>
+
+	<footer class="fuss">
+		<a href="index.html">CodeHilfe erstellen</a>
+	</footer>
+
+	<script src="lib/prism/prism.js"></script>
+	<script src="js/teilen.js"></script>
+	<script src="js/hilfe.js"></script>
+	<script src="lib/codehilfe/js/codehilfe.js"></script>
+</body>
+
+</html>

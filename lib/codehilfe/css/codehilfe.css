@@ -1,0 +1,374 @@
+/* ============================================================
+ * CodeHilfe – interaktive Code-Aufgaben (siehe js/codehilfe.js)
+ * ============================================================ */
+
+.ch-codehilfe {
+    margin: 1.5rem 0;
+}
+
+.ch-konfigfehler {
+    box-sizing: border-box;
+    border: 2px solid #b82929;
+    background: #fceceb;
+    color: #3f1717;
+    padding: 0.75rem 1rem;
+}
+
+.ch-konfigfehler-titel {
+    display: block;
+    color: #b82929;
+}
+
+.ch-konfigfehler-liste {
+    margin: 0.5rem 0 0;
+}
+
+/* Codeanzeige im Stil von pre.quelltext */
+article pre.ch-code {
+    background: whitesmoke;
+    border-left: 4px solid #0077b6;
+    padding: 0.5rem 1rem;
+    margin: 0.25rem 0 !important;
+    font-family: PTMono, "Courier New", monospace;
+    font-size: inherit;
+    overflow-x: auto;
+}
+
+article pre.ch-code.ch-fest {
+    border-left-color: #9fb6c4;
+    background: #eef3f7;
+    color: #444;
+    padding-left: 1.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.ch-codezeile {
+    white-space: pre;
+    min-height: 1.4em;
+    line-height: 1.5;
+}
+
+/* !important nötig: styles.css setzt "article :not(pre) > code"
+ * mit !important auf grauen Hintergrund */
+article .ch-codehilfe code.ch-zeile {
+    font-family: PTMono, "Courier New", monospace;
+    white-space: pre;
+    background: transparent !important;
+    border: none;
+    padding: 0 !important;
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+}
+
+/* Sortierliste */
+.ch-liste {
+    list-style: none;
+    margin: 0.25rem 0;
+    padding: 0;
+}
+
+.ch-block {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: #fff;
+    border: 1px solid #d5d5d5;
+    border-left: 4px solid #d5d5d5;
+    border-radius: 2px;
+    margin: 3px 0;
+    padding: 2px 6px 2px 1.5rem;
+    line-height: 1.6;
+}
+
+.ch-block .ch-zeile {
+    flex: 1 1 auto;
+    overflow-x: auto;
+}
+
+/* Das Symbol nutzt den schon vorhandenen linken Innenabstand und verschiebt
+ * deshalb weder Code noch Drag-and-drop-Werkzeuge. */
+.ch-status {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.9rem;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+}
+
+.ch-status-richtig {
+    color: #2e7d32;
+}
+
+.ch-status-falsch {
+    color: #b82929;
+}
+
+.ch-block.ch-gezogen {
+    opacity: 0.75;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    background: #f4faff;
+}
+
+.ch-block.ch-richtig {
+    border-left-color: #2e7d32;
+    background: #eef7ee;
+}
+
+.ch-block.ch-falsch {
+    border-left-color: #b82929;
+    background: #fdeeec;
+}
+
+.ch-griff {
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    color: #888;
+    padding: 0 6px;
+    font-size: 1.1em;
+}
+
+.ch-gezogen .ch-griff {
+    cursor: grabbing;
+}
+
+.ch-werkzeuge {
+    margin-left: auto;
+    white-space: nowrap;
+    padding-left: 8px;
+    font-size: 0.8125em;
+}
+
+/* kleine Werkzeugknöpfe: globales Button-Styling zurücknehmen */
+article button.ch-mini {
+    margin: 0 1px;
+    padding: 0 7px;
+    box-shadow: none;
+    background: #e8e8e8;
+    font-size: 0.8em;
+    line-height: 1.6;
+}
+
+article button.ch-mini:hover {
+    background: #0077b6;
+    color: #fff;
+}
+
+article button.ch-weg {
+    background: #f3dcdc;
+}
+
+/* Ablage für überflüssige Zeilen */
+.ch-ablage {
+    border: 2px dashed #c5c5c5;
+    border-radius: 4px;
+    background: #fafafa;
+    margin-top: 0.75rem;
+    padding: 0.4rem 0.75rem 0.5rem;
+}
+
+.ch-ablage-titel {
+    font-size: 0.75em;
+    color: #666;
+}
+
+.ch-ablage-liste {
+    min-height: 1.5em;
+}
+
+/* Beide Arten von Lücken sehen absichtlich gleich aus. Erst beim Tippen
+ * bzw. Ablegen zeigt sich, wie die jeweilige Lücke gefüllt werden kann. */
+article .ch-lueckenfeld {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 5ch;
+    font-family: PTMono, "Courier New", monospace;
+    font-size: inherit;
+    border: 1px dashed #0077b6;
+    border-radius: 2px;
+    background: #fff;
+    padding: 0 3px;
+    margin: 0 1px;
+    line-height: 1.3;
+    height: 1.3em;
+    box-sizing: content-box;
+    vertical-align: baseline;
+}
+
+article .ch-lueckenfeld:focus-within {
+    outline: none;
+    border-style: solid;
+    box-shadow: 0 0 3px rgba(0, 119, 182, 0.6);
+}
+
+article .ch-lueckenfeld input.ch-luecke {
+    field-sizing: content;
+    width: auto;
+    min-width: 5ch;
+    height: 1.3em;
+    box-sizing: content-box;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: 1.3;
+}
+
+article .ch-lueckenfeld input.ch-luecke[hidden] {
+    display: none;
+}
+
+article .ch-lueckenfeld.ch-getippt {
+    border-style: solid;
+    background: #eef6fb;
+}
+
+article .ch-lueckenfeld.ch-per-drag {
+    border-style: solid;
+    background: #fff5d9;
+}
+
+article .ch-lueckenfeld.ch-ok {
+    border: 1px solid #2e7d32;
+    background: #eef7ee;
+}
+
+article .ch-lueckenfeld.ch-fehler {
+    border: 1px solid #b82929;
+    background: #fdeeec;
+}
+
+article .ch-lueckenfeld.ch-fehler input.ch-luecke,
+article .ch-lueckenfeld.ch-fehler > button.ch-luecken-karte {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}
+
+/* Lücken, die mit Codebausteinen gefüllt werden */
+.ch-luecken-auswahl {
+    margin: 0.6rem 0 0.25rem;
+}
+
+.ch-luecken-auswahl-titel {
+    margin-bottom: 0.25rem;
+    font-size: 0.9em;
+}
+
+.ch-luecken-karten {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    min-height: 2.2rem;
+    padding: 0.4rem;
+    border: 2px dashed #b8c5cc;
+    border-radius: 2px;
+    background: #f7f9fa;
+}
+
+.ch-luecken-karten:focus {
+    outline: 2px solid rgba(0, 119, 182, 0.65);
+    outline-offset: 1px;
+}
+
+article button.ch-luecken-karte {
+    margin: 0;
+    padding: 0.1rem 0.4rem;
+    border: 1px solid #0077b6;
+    border-radius: 2px;
+    box-shadow: none;
+    background: #fff;
+    color: inherit;
+    font-family: PTMono, "Courier New", monospace;
+    font-size: inherit;
+    line-height: 1.3;
+    cursor: grab;
+    touch-action: none;
+}
+
+article button.ch-luecken-karte:hover,
+article button.ch-luecken-karte:focus,
+article button.ch-luecken-karte.ch-ausgewaehlt {
+    background: #e8f4fa;
+    color: inherit;
+}
+
+article button.ch-luecken-karte.ch-ausgewaehlt {
+    outline: 2px solid #0077b6;
+    outline-offset: 1px;
+}
+
+article .ch-lueckenfeld > button.ch-luecken-karte {
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+article .ch-lueckenfeld > button.ch-luecken-karte::before {
+    content: "⠿";
+    margin-right: 0.25em;
+    color: #8a7541;
+}
+
+article .ch-lueckenfeld.ch-ok > button.ch-luecken-karte::before {
+    content: none;
+}
+
+article button.ch-luecken-karte.ch-luecken-karte-gezogen {
+    opacity: 0.25;
+}
+
+button.ch-luecken-geist {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10000;
+    pointer-events: none;
+    margin: 0;
+    padding: 0.1rem 0.4rem;
+    border: 1px solid #0077b6;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    background: #fff;
+    color: inherit;
+    font-family: PTMono, "Courier New", monospace;
+    font-size: inherit;
+    line-height: 1.3;
+    opacity: 0.9;
+    cursor: grabbing;
+    will-change: transform;
+}
+
+/* Aktionen und Rückmeldung */
+.ch-aktionen {
+    margin-top: 0.5rem;
+}
+
+.ch-aktionen button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.ch-meldung {
+    font-weight: bold;
+    min-height: 1.2em;
+    margin: 0.25rem 0 0;
+}
+
+.ch-meldung.ch-erfolg {
+    color: #2e7d32;
+}
+
+.ch-meldung.ch-misserfolg {
+    color: #b82929;
+}
