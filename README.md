@@ -54,6 +54,18 @@ python3 -m http.server 8642 --bind 127.0.0.1
 
 Danach <http://127.0.0.1:8642/> öffnen.
 
+## Tests
+
+Die Browser-Regressionstests prüfen typische CodeHilfe-Aufgaben im echten
+Chromium-Browser. Sie decken unter anderem austauschbare Zeilen und Bausteine,
+falsche Zuordnungen sowie mehrfach vorkommende Zeilen in benannten Gruppen ab.
+
+```bash
+npm ci
+npx playwright install chromium
+npm test
+```
+
 ## Aufbau
 
 ```text
